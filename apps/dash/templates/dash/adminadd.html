@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+    <body class="text-center">
+        <nav class="navbar navbar-expand-md navbar-dark static-top" style="background-color: #7c8891">
+            <a class="navbar-brand" href="">Greg</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/edit">Profile</a>
+                </li>
+            </ul>
+            <h4 class="ml-auto">User ID in Session {{request.session.user_id}}</h4>
+            <a class="btn btn-outline-dark my-2 my-sm-0 ml-auto" href="/clear">Log Off</a>
+        </nav>
+        
+        <div class="" style="margin-top:30px;">
+                <h3 style="display:inline-block;">Add a New User</h3>
+                <a href="/dashboard" style="vertical-align:top; margin-left: 100px;"><button class="btn btn-primary btn-sm "type="submit">Return to Dashboard</button></a>
+        </div>
+
+        <form action="/add"  method="POST" class="form-signin w-25 p-3 mx-auto" style="margin-top:100px;">
+            {% csrf_token %}
+            <label for="inputEmail" >Email address</label>
+            <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" >First Name</label>
+            <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+            <label for="inputPassword" >Last Name</label>
+            <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+            <label for="inputPassword" >Password</label>
+            <input type="text" name="password" class="form-control" placeholder="Password" required>
+            <label for="inputPassword" >Password Confirmation</label>
+            <input type="text" name="confirmpassword" class="form-control" placeholder="Confirmation" required>
+            <button class="mx-auto btn btn-lg btn-primary btn-block " style="margin-top:10px;" type="submit">Create</button>
+        </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+     </body>
+</html>
